@@ -9,3 +9,5 @@ CREATE TABLE cidade (
     nome varchar (255) NOT NULL,
     uf_id int (11) NOT NULL
 );
+
+/* criando tabelas */
