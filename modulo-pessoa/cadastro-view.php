@@ -1,10 +1,6 @@
 <?php
 
-$listaUfs = [
-	'RS' => 'Rio Grande do Sul',
-	'SC' => 'Santa Catarina',
-	'PR' => 'Paraná',
-];
+
 
 
 $listaCidades = [
@@ -132,13 +128,11 @@ $listaCidades = [
 							<div class="radio">
 								<label>
 									<input name="sexo" id="sexo_masculino" value="M" type="radio"> Masculino
-									Masculino
 								</label>
 							</div>
 							<div class="radio">
 								<label>
 									<input name="sexo" id="sexo_feminino" value="F" type="radio"> Feminino
-									Feminino
 								</label>
 							</div>
 							<?php echo exibirErro($listaErros, 'sexo'); ?>
@@ -159,8 +153,8 @@ $listaCidades = [
 								<option value="">Selecione um estado</option>
 								<?php
 								// ForEach
-								foreach ($listaUfs as $key => $uf) {
-									echo "<option value=\"" . $key . "\">" . $uf . "</option>";
+								foreach ($listaUf as $uf) {
+									echo "<option value=\"" . $key->id . "\">" . $uf->nome . "</option>";
 								}
 
 								// For tradicional

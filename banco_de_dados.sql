@@ -1,5 +1,4 @@
 /* criando tabelas */
-
 CREATE TABLE uf (
     id  int (11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nome varchar(255) not null,
@@ -12,6 +11,10 @@ CREATE TABLE cidade (
     uf_id int (11) NOT NULL
 );
 
+/* Inseridno uma chave estrangeira */
+ALTER TABLE cidade ADD FOREIGN KEY cidade_uf_id (uf_id) REFERENCES uf (id);
+
+/* Inserindo estados */
 INSERT INTO uf (nome, sigla) values ('Acre', 'AC');
 INSERT INTO uf (nome, sigla) values ('Alagoas', 'AL');
 INSERT INTO uf (nome, sigla) values ('Amapá', 'AP');
@@ -40,5 +43,5 @@ INSERT INTO uf (nome, sigla) values ('São Paulo', 'SP');
 INSERT INTO uf (nome, sigla) values ('Sergipe', 'SE');
 INSERT INTO uf (nome, sigla) values ('Tocantins', 'TO');
 
-
-
+/* Inserindo cidades */
+INSERT INTO cidade (nome, uf_id) values ('Caxias do Sul', 21);
