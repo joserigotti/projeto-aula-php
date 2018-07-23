@@ -26,7 +26,7 @@ function validarFormularioSimples($post)
         $listaErros['email'] = "Informe um email válido.";
     }
 
-    if (!isset ($post['sexo']) || !$post['sexxo']){
+    if (!$post['sexo']) {
         $listaErros['sexo'] = "Selecione um sexo.";
 
     } else if ( !in_array($post['sexo'], ['M', 'F']) ) {
@@ -51,29 +51,6 @@ function validarFormularioSimples($post)
 }
 
 
-/**
- * Recebe o array $post contendo osvalores do $_POST,
- * e um array contendo as chaves do array $post
- */
-function validarFormularioAvancado($post, $chaves)
-{
-    $listaErros = [];
-
-    foreach($chaves as $chave) {
-        $valido = false;
-
-        if (isset($post[$chave])) {
-            if ($post[$chave]) {
-                $valido = true;
-            }
-        }
-        if (!$valido) {
-          $listaErros[$chave] = "Campo obrigatório.";
-        }
-    }
-    return $listaErros;
-}
-
 // Busca todos os UFs (estados) do banco 
 $listaUf = select_db("SELECT id, nome, sigla FROM uf;");
 
@@ -92,19 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         include "cadastro-view.php";
     }
     
-    echo $_POST['nome'];
-    echo "<br>";
-    /*
-    echo $_POST['email'];
-    echo '<br>';
-    echo $_POST['sexo'];
-    echo '<br>';
-    echo $_POST['data_nascimento'];
-    echo '<br>';
-    echo $_POST['uf'];
-    echo '<br>';
-    echo $_POST['cidade'];
-    */
 }
 
 
