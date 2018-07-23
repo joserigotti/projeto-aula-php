@@ -12,8 +12,9 @@ function connect_db()
 
     $conn = null;
     try {
-        $conn = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPass
-        array(
+        $conn = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPass);
+        $conn = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPass,
+            array(
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
             )
