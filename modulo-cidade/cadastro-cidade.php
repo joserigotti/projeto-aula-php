@@ -20,7 +20,7 @@ function validarFormularioSimples($post)
         $listaErros['nome'] = "Nome obrigatório.";
     }
 
-    if (!isset (!$post['uf']) || !$post['uf']) {
+    if (!isset ($post['uf']) || !$post['uf']) {
         $listaErros['uf'] = "Estado obrigatório.";
     }
 
@@ -43,6 +43,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     //$listaErros = validarFormularioAvancado($_POST, ['nome', 'email']);
 
     if (count($listaErros) > 0) {
+        include "cadastro-view.php";
+    } else {
+
+        $sql = "INSERT INTO cidade (nome, uf_id) VALUES ('" . $_POST['nome']. "'," . $_POST['uf'] . ");";
+
+        
+        $cidadeId = insert_db ($sql);
+        
+        $mensagemSucesso = '';
+        $mensagemErro = '';
+
+        if ($cidadeId){
+            $mensagemSucesso = "Cidade cadastrada com sucesso";
+        } else {
+            $mensagemErro = "Erro inesperado";
+        }
         include "cadastro-view.php";
     }
     
