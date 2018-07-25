@@ -10,33 +10,48 @@ function exibirErro($listaErros, $chave)
 }
 
 /**
+ * Valida se a $sigla recebida eh string de A-Z ou a-z e somente
+ * 2 caracateres
+ */
+function validarSigla($sigla) {
+    $padrao = "/^([a-zA-Z]{2})$/";
+    if (preg_match($padrao, $sigla)) {
+        return true;
+    }
+    return false;
+}
+
+
+/**
  * Valida formulario simples
  */
 function validarFormularioSimples($post) 
 {
     $listaErros = [];
 
-    if (!$post['nome']) {
+    if (!isset($post['nome']) || !$post['nome'] ) {
         $listaErros['nome'] = "Nome obrigatório.";
     }
 
-    if (!isset ($post['sigla']) || !$post['sigla']) {
-        $listaErros['sigla'] = "Sigla obrigatório.";
-    }
 
+    if (!isset($post['sigla']) || !$post['sigla']) {
+    // o codigo abaixo é igual ao if acima
+    // if (isset($post['sigla']) == false || $post['sigla'] == false) {
+
+        $listaErros['sigla'] = "Informe a sigla do estado.";        
+
+    } else if ( !validarSigla($post['sigla']) ) {
+        $listaErros['sigla'] = "Informe uma sigla com duas letras.";
+    } 
     return $listaErros;
 }
 
-
-// Busca todos os UFs (estados) do banco 
-$listaUf = select_db("SELECT id, nome, sigla FROM uf;");
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $listaErros = [];
     include "cadastro-view.php";
 
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    echo "Formulario enviado <br>";
     
     // Utilizem o metodo validarFormularioSimples OU validarFormularioAvancado
     $listaErros = validarFormularioSimples($_POST);
@@ -46,22 +61,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         include "cadastro-view.php";
     } else {
 
-        $sql = "INSERT INTO cidade (nome, sigla) VALUES ('" . $_POST['nome']. "'," . $_POST['sigla'] . ");";
+        $sigla = strtoupper($_POST['sigla']);
+        $sql = "INSERT INTO uf (nome, sigla)
+            VALUES ('{$_POST['nome']}', '{$sigla}');";
 
-        
-        $estadoId = insert_db ($sql);
-        
+        dd($sql);
+
+        $cidadeId = insert_db($sql);
+
+        // Variaveis para controle de erros.
         $mensagemSucesso = '';
         $mensagemErro = '';
 
-        if ($estadoId){
-            $mensagemSucesso = "Cidade cadastrada com sucesso";
+        if ($cidadeId) {
+            $mensagemSucesso = "Cidade cadastrada com sucesso.";
         } else {
-            $mensagemErro = "Erro inesperado";
+            $mensagemErro = "Erro inesperado.";
         }
         include "cadastro-view.php";
+        
     }
-    
 }
 
 
