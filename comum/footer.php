@@ -8,6 +8,20 @@
 </footer>
 <?php /* FIM RODAPE */ ?>
 
+<!-- Modal -->
+<div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-sim" data-dismiss="modal">sim</button>
+        <button type="button" class="btn btn-primary btn-nao">nao</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <?php /* SCRIPTS FINAIS */ ?>
 <script src="<?php echo $SITE_URL . "/static/vendor/jquery/jquery.min.js"; ?>"></script>
 <script src="<?php echo $SITE_URL . "/static/vendor/bootstrap/js/bootstrap.bundle.min.js"; ?>"></script>
