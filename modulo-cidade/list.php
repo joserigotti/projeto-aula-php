@@ -1,16 +1,16 @@
 <?php
-include "../comum/head.php";
-include "../comum/side-menu.php";
+include '../comum/head.php';
+include '../comum/side-menu.php';
 ?>
 
-    <div class="content-wrapper">
-        <div class="container-fluid">
+<div class="content-wrapper">
+	<div class="container-fluid">
 
-    <?php
+	<?php
 	include "../comum/migalhas.php";
 	?>
 
-        <?php
+    <?php
     if ($mensagemSucesso) {
         ?>
         <div class="alert alert-success">
@@ -18,17 +18,30 @@ include "../comum/side-menu.php";
         </div>
         <?php
     }
-     if ($listaErros) {
+
+    if ($listaErros) {
         ?>
         <div class="alert alert-danger">
             <?php echo exibirErro($listaErros, 'delete'); ?>
         </div>
         <?php
     }
-    
-    ?>
+    /*
+    if (isset($_SESSION['msg_sucesso']) && $_SESSION['msg_sucesso']) {
+        
+        <div class="alert alert-success">
+            <?php echo $_SESSION['msg_sucesso']; ?>
+        </div>
+        
+        unset($_SESSION['msg_sucesso']);
+    }
+    */
 
-     <table class="table table-bordered table-striped">
+    ?>
+    <a href="/modulo-cidade/cadastro-cidade.php">
+        <button class="btn btn-default">Nova Cidade</button>
+    </a>
+    <table class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>ID</th>
@@ -44,7 +57,9 @@ include "../comum/side-menu.php";
                     <td><?php echo $cidade->cidade_nome; ?></td>
                     <td><?php echo "{$cidade->uf_nome} ({$cidade->uf_sigla})"; ?></td>
                     <td>
-                        <button class="btn btn-primary">Editar</button>
+                        <a href="<?php echo "/modulo-cidade/cadastro-cidade.php?edit=1&id={$cidade->cidade_id}"; ?>">
+                            <button type="button" class="btn btn-primary">Editar</button>
+                        </a>
                         <button class="btn btn-danger" data-delete-message="<?php echo "Deseja deletar a cidade {$cidade->cidade_nome} ?"; ?>" data-delete-url="<?php echo "/modulo-cidade?delete=1&id={$cidade->cidade_id}"; ?>"  onclick="deletarRegistro(this);">
                             <i class="fa fa-remove"></i>
                         </button>
@@ -53,20 +68,22 @@ include "../comum/side-menu.php";
             <?php } ?>
         </tbody>
     </table>
-     </div>
+
+    </div>
 </div>
+
 
 <script type="text/javascript">
 /*
 function deletarRegistro(id) {
-     var ok = confirm("Deseja deletar o registro ID = " + id + " ?");
+
+    var ok = confirm("Deseja deletar o registro ID = " + id + " ?");
     if (ok) {
         window.location.href = "/modulo-cidade?delete=1&id=" + id;
     }
 }
 */
 </script>
-
 <?php
-include "../comum/footer.php"
+include "../comum/footer.php";
 ?>

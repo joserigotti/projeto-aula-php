@@ -1,6 +1,6 @@
 <?php
 /**
- * Funções úteis do projeto. teste
+ * Funções úteis do projeto.
  */
 
 /**
@@ -9,7 +9,7 @@
  */
 function site_url()
 {
-    return null;
+    return $SITE_URL;
 }
 
 /**
@@ -34,7 +34,8 @@ function d($valor)
 }
 
 /**
- * Valida o email
+ * Valida o email.
+ * Através de expressões regulares do PHP.
  */
 function validarEmail($email) {
     $conta = "/^[a-zA-Z0-9\._-]+@";
@@ -48,7 +49,6 @@ function validarEmail($email) {
     return false;
 }
 
-
 /**
  * Exibe erros de um array pegando pela chave.
  */
@@ -59,5 +59,44 @@ function exibirErro($listaErros, $chave)
     }
     return '';
 }
+
+function deletarRegistro($id, $tableName) {
+    // String do SQL utilizando chaves ({}) para concatenar.
+    //$lista = select_db("SELECT id, nome FROM {$tableName} WHERE id = {$id}");
+
+    // String do SQL utilizando ponto (.) para concatenar.
+    return delete_db("DELETE FROM {$tableName} WHERE id = {$id}");
+}
+
+/**
+ * Direciona o usuario para a $url recebida no parametro.
+ */
+function redirect($url)
+{
+    die("<script>window.location.href = '{$url}';</script>");
+}
+
+
+function alertSuccess($titulo, $mensagem, $delay=3000, $icone='fa fa-warning') {
+    $_SESSION['msg_sucesso'] = [
+        'title' => $titulo,
+        'icon' => $icone,
+        'message' => $mensagem,
+        'type' => "success",
+        'delay' => $delay,
+    ];
+}
+
+function alertError($titulo, $mensagem, $delay=3000, $icone='fa fa-warning') {
+    $_SESSION['msg_erro'] = [
+        'title' => $titulo,
+        'icon' => $icone,
+        'message' => $mensagem,
+        'type' => "danger",
+        'delay' => $delay,
+    ];
+}
+
+
 
 ?>

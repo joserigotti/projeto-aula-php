@@ -2,15 +2,12 @@
 include "../comum/head.php";
 include "../comum/side-menu.php";
 ?>
-
-<?php /* INICIO CONTEUDO */ ?>
 <div class="content-wrapper">
 	<div class="container-fluid">
 
-<?php
-include "../comum/migalhas.php";
-?>
-
+	<?php
+	include "../comum/migalhas.php";
+	?>
 	<div class="card">
 		<div class="card-header">
         	<i class="fa fa-user"></i> Cadastro de Pessoa
@@ -118,6 +115,7 @@ include "../comum/migalhas.php";
 
 	</div>
 </div>
+
 
 <?php
 include "../comum/footer.php";

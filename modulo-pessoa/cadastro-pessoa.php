@@ -16,34 +16,34 @@ function validarFormularioSimples($post)
 {
     $listaErros = [];
 
-    if (!isset ($post['nome']) || !$post['nome']){
+    if (!$post['nome']) {
         $listaErros['nome'] = "Nome obrigatório.";
     }
 
-    if (!isset ($post['email']) || !$post['email']){
+    if (!$post['email']) {
         $listaErros['email'] = "Email obrigatório.";
     } else if ( !validarEmail($post['email']) ) {
         $listaErros['email'] = "Informe um email válido.";
     }
 
-    if (!isset ($post['sexo']) || !$post['sexo']){
+    if (!isset($post['sexo']) || !$post['sexo']) {
         $listaErros['sexo'] = "Selecione um sexo.";
 
     } else if ( !in_array($post['sexo'], ['M', 'F']) ) {
         // o IF acima equivale ao IF comentado abaixo
-        // if ($post['sexo'] != 'M' && $pogst['sexo'] != 'F' )
+        // if ($post['sexo'] != 'M' && $post['sexo'] != 'F' )
         $listaErros['sexo'] = "Selecione Masculino ou Feminino.";
     }
     
-    if (!isset ($post['data_nascimento']) || !$post['data_nascimento']){
+    if (!$post['data_nascimento']) {
         $listaErros['data_nascimento'] = "Data de nascimento obrigatória.";
     }
 
-    if (!isset ($post['uf']) || !$post['uf']){
+    if (!$post['uf']) {
         $listaErros['uf'] = "Estado obrigatório.";
     }
 
-    if (!isset ($post['cidade']) || !$post['cidade']){
+    if (!$post['cidade']) {
         $listaErros['cidade'] = "Cidade obrigatória.";
     }
 
